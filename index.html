@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Income Tax Calculator 2026 — Federal Brackets & Standard Deduction</title>
+<meta name="description" content="Free 2026 US federal income tax calculator. Estimate federal tax, effective & marginal rate, take-home pay and paycheck withholding using IRS Rev. Proc. 2025-32 brackets and standard deduction.">
+<link rel="canonical" href="/">
+<link rel="icon" href="data:,">
+<script>
+window.SITE_ADS = { publisherId: 'ca-pub-4405800574856346', enabled: true };
+(function(){
+  if(!window.SITE_ADS.enabled || !window.SITE_ADS.publisherId) return;
+  var s=document.createElement('script');
+  s.async=true;
+  s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+window.SITE_ADS.publisherId;
+  s.crossOrigin='anonymous';
+  document.head.appendChild(s);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Theme: Start Bootstrap "Modern Business" (MIT) - corporate layer, emerald/charcoal override */
+:root{
+--ink:#1c1917;--body:#292524;--muted:#6b6660;
+--emerald:#059669;--emerald-dark:#047857;--emerald-bright:#34d399;--emerald-light:#ecfdf5;--emerald-ring:rgba(5,150,105,.18);
+--border:#e7e5e4;--border-dark:#d6d3d1;--row:#f0efed;
+--bg:#ffffff;--card:#ffffff;--soft:#fafaf9;
+--radius:6px;--radius-sm:6px;
+--shadow:0 .125rem .25rem rgba(28,25,23,.06);
+color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(5,150,105,.12)}
+html{scroll-behavior:smooth}
+body{margin:0;padding-top:64px;font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:.9375rem;color:var(--body);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--emerald-dark);text-decoration:none}a:hover{text-decoration:underline}
+::selection{background:#a7f3d0;color:var(--ink)}
+:focus-visible{outline:3px solid var(--emerald-ring);outline-offset:2px}
+section[id]{scroll-margin-top:84px}
+.topbar{background:#fff;position:fixed;top:0;left:0;right:0;z-index:50;box-shadow:0 1px 3px rgba(28,25,23,.1);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1140px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:800;font-size:1.25rem;color:var(--ink);letter-spacing:-.01em}.logo span{color:var(--emerald)}
+.nav{display:flex;gap:4px;flex-wrap:wrap}.nav a{color:var(--body);font-size:.9rem;font-weight:500;padding:8px 12px;border-radius:var(--radius-sm)}.nav a:hover{background:var(--soft);text-decoration:none;color:var(--emerald-dark)}
+@media(max-width:720px){.nav{display:none}}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.page-head{background:var(--soft);border-bottom:1px solid var(--border);padding:44px 0 38px}
+.crumb{font-size:.8125rem;color:var(--muted);margin-bottom:16px}
+.crumb a{color:var(--muted)}.crumb a:hover{color:var(--emerald-dark)}
+.crumb .sep{margin:0 8px;color:var(--border-dark)}
+.crumb .cur{color:var(--ink);font-weight:500}
+h1{font-size:clamp(1.85rem,4.4vw,2.55rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin:0 0 10px;color:var(--ink);max-width:840px}
+h1 em{font-style:normal;color:var(--emerald-dark)}
+.lead{font-size:1.0625rem;color:var(--muted);max-width:720px;margin:0}
+.head-meta{margin:16px 0 0;font-size:.8125rem;font-weight:600;color:var(--emerald-dark);letter-spacing:.02em}
+.features{padding:28px 0 4px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:860px){.stats{grid-template-columns:1fr 1fr}}
+.stat{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.tile{flex:0 0 auto;width:44px;height:44px;border-radius:6px;background:var(--emerald);display:flex;align-items:center;justify-content:center}
+.stat b{display:block;font-size:1.25rem;font-weight:700;color:var(--ink);letter-spacing:-.01em;line-height:1.25}
+.stat span{font-size:.8125rem;color:var(--muted)}
+.calc-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:24px;margin:24px 0 8px}
+@media(max-width:860px){.calc-grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+.card h2{margin:0 0 6px;font-size:1.25rem;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.card p.sub{margin:0 0 8px;color:var(--muted);font-size:.875rem}
+label{display:block;font-weight:500;font-size:.875rem;margin:16px 0 6px;color:var(--ink)}
+input[type=number],input[type=text],select{width:100%;height:42px;padding:.5rem .75rem;border:1px solid var(--border-dark);border-radius:var(--radius-sm);background:#fff;font:inherit;font-size:.9375rem;color:var(--body)}
+input:focus,select:focus{outline:none;border-color:var(--emerald);box-shadow:0 0 0 3px var(--emerald-ring)}
+.check{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-top:16px;background:var(--soft)}
+.check input{width:18px;height:18px;min-height:18px;margin-top:2px;accent-color:var(--emerald)}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--emerald);color:#fff;font-weight:600;font-size:.9375rem;padding:12px 18px;border-radius:6px;border:1px solid var(--emerald);cursor:pointer;width:100%;margin-top:18px}
+.btn:hover{background:var(--emerald-dark);border-color:var(--emerald-dark)}
+.result-big{background:var(--emerald-light);border:1px solid #bbefcd;border-left:5px solid var(--emerald);border-radius:var(--radius);padding:20px 24px}
+.result-big span{font-size:.8125rem;color:#44403c;font-weight:500}
+.result-big strong{display:block;font-size:2.125rem;font-weight:800;line-height:1.1;margin:6px 0;color:var(--emerald-dark);letter-spacing:-.02em}
+.result-big small{color:#57534e;font-size:.8125rem}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.kpi{border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;background:var(--card)}
+.kpi span{font-size:.6875rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.kpi b{display:block;font-size:1.125rem;font-weight:700;color:var(--ink);margin-top:3px}
+.kpi b.badge{display:inline-block;background:var(--emerald-light);color:var(--emerald-dark);border:1px solid #a7f3d0;padding:2px 12px;border-radius:999px;font-size:.9375rem;margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:.875rem}
+th{text-align:left;background:#f5f5f4;color:var(--ink);font-size:.8125rem;font-weight:600;padding:10px 12px;border-bottom:2px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--row);color:var(--body)}
+td.r,th.r{text-align:right}
+.table-scroll{overflow:auto;border:1px solid var(--border);border-radius:var(--radius);background:#fff}
+.section{padding:32px 0 4px}
+.section h2{font-size:1.375rem;font-weight:700;line-height:1.25;color:var(--ink);margin:0 0 8px;letter-spacing:-.01em}
+.section>p{color:var(--muted);max-width:760px;font-size:.9375rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.tab{border:1px solid var(--border-dark);background:#fff;color:var(--body);padding:8px 14px;border-radius:6px;font-weight:600;font-size:.875rem;cursor:pointer;min-height:40px}
+.tab:hover{border-color:var(--emerald);color:var(--emerald-dark)}
+.tab.active{background:var(--emerald);color:#fff;border-color:var(--emerald)}
+.ad-slot{margin:24px auto;max-width:970px;min-height:110px;border:1.5px dashed var(--border-dark);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#a8a29e;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;background:var(--soft)}
+.guides{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:760px){.guides{grid-template-columns:1fr}}
+.guide{border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;background:var(--card);box-shadow:var(--shadow)}
+.guide h3{margin:0 0 8px;color:var(--ink);font-size:1rem;font-weight:700}
+.guide p{color:var(--muted);font-size:.875rem;margin:0}
+details{border:1px solid var(--border);border-radius:var(--radius);padding:2px 16px;margin:10px 0;background:#fff;box-shadow:var(--shadow)}
+summary{cursor:pointer;font-weight:600;font-size:.9375rem;color:var(--ink);padding:12px 0;min-height:44px}
+details p{color:var(--muted);font-size:.875rem}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}@media(max-width:860px){.pay-grid{grid-template-columns:1fr}}
+.trust{border-top:1px solid var(--border);padding:24px 0 8px;margin-top:24px}
+.trust h2{font-size:1.125rem;font-weight:700;color:var(--ink)}
+.trust p,.trust li{color:var(--muted);font-size:.875rem}
+code{background:#f5f5f4;padding:2px 6px;border-radius:6px;font-size:.8125rem;word-break:break-all}
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:var(--radius);padding:14px 16px;color:#92400e;font-size:.875rem}
+.cta{background:var(--ink);color:#fff;margin-top:56px;padding:44px 0}
+.cta-in{max-width:1140px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cta h2{color:#fff;font-size:1.5rem;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.cta p{color:#d6d3d1;margin:0;font-size:.9375rem;max-width:620px}
+.cta-btn{display:inline-flex;align-items:center;background:var(--emerald);color:#fff;font-weight:600;font-size:.9375rem;padding:12px 24px;border-radius:6px;border:1px solid var(--emerald);white-space:nowrap}
+.cta-btn:hover{background:var(--emerald-dark);border-color:var(--emerald-dark);text-decoration:none}
+footer{background:var(--ink);color:#d6d3d1;padding:48px 0 0}
+footer a{color:#d6d3d1}footer a:hover{color:var(--emerald-bright)}
+footer h3{color:#fff;font-size:1rem;font-weight:700;margin:0 0 12px}
+footer p{font-size:.875rem;margin:0}
+footer .flinks a{display:block;padding:3px 0;font-size:.875rem}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:32px}@media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+.smallprint{border-top:1px solid #44403c;margin-top:36px;padding:18px 0 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.8125rem;color:#a8a29e}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><a class="logo" href="#top" style="text-decoration:none">TaxCalc <span>USA</span></a><nav class="nav" aria-label="Main"><a href="#calculator">Calculator</a><a href="#brackets">2026 Brackets</a><a href="#paycheck">Paycheck</a><a href="#guides">Guides</a><a href="#faq">FAQ</a><a href="#privacy">Privacy</a></nav></div></header>
+
+<main id="top">
+<section class="page-head"><div class="wrap">
+<nav class="crumb" aria-label="Breadcrumb"><a href="#top">Home</a><span class="sep">/</span><a href="#calculator">Calculators</a><span class="sep">/</span><span class="cur">Income Tax Calculator 2026</span></nav>
+<h1>Income Tax Calculator 2026 — <em>know your federal tax in seconds.</em></h1>
+<p class="lead">Free, private and instant. Enter your income and filing status to see your federal tax, effective rate, marginal bracket, take-home pay and exactly how much falls in each 2026 bracket. No sign-up. Nothing leaves your browser.</p>
+<p class="head-meta">Tax Year 2026 · Returns filed in 2027 · IRS Rev. Proc. 2025-32</p>
+</div></section>
+<div class="wrap">
+<section class="features" aria-label="2026 key figures">
+<div class="stats">
+<div class="stat"><div class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><b>$16,100</b><span>Standard deduction — Single</span></div></div>
+<div class="stat"><div class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><b>$32,200</b><span>Standard deduction — Married Filing Jointly</span></div></div>
+<div class="stat"><div class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><b>$24,150</b><span>Standard deduction — Head of Household</span></div></div>
+<div class="stat"><div class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><b>Apr 15, 2027</b><span>Filing deadline for 2026 returns</span></div></div>
+</div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calculator" class="calc-grid" aria-label="Income tax calculator">
+<div class="card">
+<h2>Calculate your 2026 federal tax</h2>
+<p class="sub">All figures use the official 2026 thresholds. Adjust any field — results update live.</p>
+
+<label for="income">Annual gross income ($)</label>
+<input type="number" id="income" value="85000" min="0" step="500" inputmode="numeric">
+
+<label for="status">Filing status</label>
+<select id="status">
+<option value="single" selected>Single</option>
+<option value="mfj">Married Filing Jointly</option>
+<option value="hoh">Head of Household</option>
+<option value="mfs">Married Filing Separately</option>
+</select>
+
+<label for="pretax">Pre-tax deductions — 401(k), HSA, etc. ($ / year)</label>
+<input type="number" id="pretax" value="0" min="0" step="100" inputmode="numeric">
+
+<label for="otherded">Other deductions above the standard deduction ($)</label>
+<input type="number" id="otherded" value="0" min="0" step="100" inputmode="numeric">
+<p style="font-size:13px;color:var(--muted);margin:6px 0 0">Use this if you itemize or have extra deductions beyond the standard deduction already applied automatically.</p>
+
+<label class="check"><input type="checkbox" id="age65"><span><strong>Age 65+ or blind</strong><br><span style="color:var(--muted);font-weight:400;font-size:14px">Adds $2,050 (Single / Head of Household) or $1,650 (Joint / Separately) to your standard deduction.</span></span></label>
+
+<button class="btn" id="calcBtn" type="button">Calculate my tax ↓</button>
+<p style="font-size:13px;color:var(--muted)">Estimate only — before credits such as Child Tax Credit or education credits. See Disclaimer below.</p>
+</div>
+
+<div class="card" aria-live="polite">
+<div class="result-big"><span>Estimated federal income tax — 2026</span><strong id="taxOwed">$11,247</strong><small id="takeHomeLine">Take-home after federal tax: $73,753</small></div>
+<div class="kpis">
+<div class="kpi"><span>Taxable income</span><b id="taxableOut">$68,900</b></div>
+<div class="kpi"><span>Standard deduction used</span><b id="stdOut">$16,100</b></div>
+<div class="kpi"><span>Effective rate</span><b id="effOut">13.2%</b></div>
+<div class="kpi"><span>Marginal bracket</span><b id="margOut" class="badge">22%</b></div>
+</div>
+<h3 style="color:var(--ink);margin:20px 0 8px">How your tax breaks down by bracket</h3>
+<div class="table-scroll"><table><thead><tr><th>Bracket</th><th class="r">Income in band</th><th class="r">Tax</th></tr></thead><tbody id="breakdown"></tbody></table></div>
+<p style="font-size:14px;color:var(--muted)">This is the part most people get wrong: you do <strong>not</strong> pay your top rate on all your income. Only the slice inside each bracket is taxed at that bracket's rate — which is why your effective rate is always lower than your marginal rate.</p>
+</div>
+</section>
+
+<div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+<!-- BRACKETS -->
+<section id="brackets" class="section">
+<h2>2026 Federal Tax Brackets — full tables</h2>
+<p>These brackets apply to <strong>taxable income</strong> — your income after deductions — for tax year 2026. Rates are unchanged from 2025 (10%, 12%, 22%, 24%, 32%, 35%, 37%); thresholds were inflation-adjusted under IRS Revenue Procedure 2025-32.</p>
+<div class="tabs" role="tablist">
+<button class="tab active" data-tab="single" type="button">Single</button>
+<button class="tab" data-tab="mfj" type="button">Married Filing Jointly</button>
+<button class="tab" data-tab="hoh" type="button">Head of Household</button>
+<button class="tab" data-tab="mfs" type="button">Married Filing Separately</button>
+</div>
+<div class="table-scroll"><table><thead><tr><th>Rate</th><th>Taxable income range</th><th class="r">Tax at top of band*</th></tr></thead><tbody id="bracketBody"></tbody></table></div>
+<p style="font-size:13px;color:var(--muted)">*Cumulative tax if your taxable income reaches the top of that band. Source: IRS Rev. Proc. 2025-32, §4.01.</p>
+
+<h3 style="color:var(--ink);margin-top:26px">Standard deduction 2026 at a glance</h3>
+<div class="table-scroll"><table><thead><tr><th>Filing status</th><th class="r">Standard deduction</th><th class="r">Age 65+ / blind add-on</th></tr></thead><tbody>
+<tr><td>Single</td><td class="r">$16,100</td><td class="r">+$2,050</td></tr>
+<tr><td>Married Filing Jointly</td><td class="r">$32,200</td><td class="r">+$1,650 per spouse</td></tr>
+<tr><td>Head of Household</td><td class="r">$24,150</td><td class="r">+$2,050</td></tr>
+<tr><td>Married Filing Separately</td><td class="r">$16,100</td><td class="r">+$1,650</td></tr>
+</tbody></table></div>
+</section>
+
+<div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+<!-- PAYCHECK -->
+<section id="paycheck" class="section">
+<h2>Paycheck estimator — what lands in each pay?</h2>
+<p>Turn an annual salary into a per-paycheck estimate, including federal withholding and FICA payroll taxes. State and local taxes vary widely and are not included.</p>
+<div class="pay-grid">
+<div class="card">
+<h2>Your pay details</h2>
+<label for="pSalary">Annual gross salary ($)</label>
+<input type="number" id="pSalary" value="85000" min="0" step="500">
+<label for="pFreq">Pay frequency</label>
+<select id="pFreq"><option value="52">Weekly (52 pays)</option><option value="26" selected>Biweekly (26 pays)</option><option value="24">Semi-monthly (24 pays)</option><option value="12">Monthly (12 pays)</option></select>
+<label for="pStatus">Filing status (for withholding estimate)</label>
+<select id="pStatus"><option value="single" selected>Single</option><option value="mfj">Married Filing Jointly</option><option value="hoh">Head of Household</option><option value="mfs">Married Filing Separately</option></select>
+<label for="wageBase">Social Security wage base 2026 ($) — editable</label>
+<input type="number" id="wageBase" value="184500" min="0" step="100">
+<p style="font-size:13px;color:var(--muted)">Social Security tax is 6.2% on wages up to the wage base. Medicare is 1.45% on all wages (an extra 0.9% applies to high earners above IRS thresholds — not modeled here).</p>
+</div>
+<div class="card" aria-live="polite">
+<h2>Per-paycheck estimate</h2>
+<div class="table-scroll"><table><tbody>
+<tr><td>Gross pay per paycheck</td><td class="r"><strong id="ppGross">$3,269</strong></td></tr>
+<tr><td>Federal income tax withholding</td><td class="r" id="ppFed">−$433</td></tr>
+<tr><td>Social Security (6.2%)</td><td class="r" id="ppSS">−$203</td></tr>
+<tr><td>Medicare (1.45%)</td><td class="r" id="ppMed">−$47</td></tr>
+<tr><td style="font-weight:800;color:var(--ink)">Estimated net pay</td><td class="r" style="font-weight:800;color:var(--emerald)" id="ppNet">$2,587</td></tr>
+</tbody></table></div>
+<div class="kpis"><div class="kpi"><span>Annual FICA total</span><b id="ficaAnnual">$6,503</b></div><div class="kpi"><span>Annual net (after federal + FICA)</span><b id="netAnnual">$67,250</b></div></div>
+<p style="font-size:14px;color:var(--muted)">Withholding is an estimate based on annualizing your pay. Your actual W-4 settings, pre-tax benefits and state taxes will change the real number.</p>
+</div>
+</div>
+</section>
+
+<!-- GUIDES -->
+<section id="guides" class="section">
+<h2>Guides — understand your 2026 tax</h2>
+<p>Short, plain-English explainers written for this site, using the official 2026 figures.</p>
+<div class="guides">
+<article class="guide"><h3>2026 Federal Tax Brackets Explained</h3><p>The US federal system has seven marginal rates for 2026: 10%, 12%, 22%, 24%, 32%, 35% and 37%. “Marginal” is the key word. If you are single, the first $12,400 of taxable income is taxed at 10%, the next slice up to $50,400 at 12%, the next up to $105,700 at 22%, and so on. Moving into a higher bracket never reduces your take-home pay — only the dollars above the threshold are taxed at the higher rate. Brackets differ by filing status: married couples filing jointly get roughly double the single thresholds through most bands, with the 37% rate starting above $768,700 of taxable income.</p></article>
+<article class="guide"><h3>Standard Deduction 2026: How Much Is It?</h3><p>For 2026 the standard deduction is $16,100 for single filers, $32,200 for married filing jointly, $24,150 for head of household and $16,100 for married filing separately. It is the amount of income the federal government does not tax at all — think of it as a 0% bracket before the 10% bracket begins. Taxpayers aged 65 or older, or blind, add $2,050 (single / head of household) or $1,650 per spouse (joint). Roughly 9 in 10 filers take the standard deduction because it is larger than their itemized deductions would be.</p></article>
+<article class="guide"><h3>How to Calculate Your Federal Income Tax in 5 Steps</h3><p><strong>1.</strong> Add up your gross income. <strong>2.</strong> Subtract pre-tax contributions like 401(k) and HSA to get adjusted gross income. <strong>3.</strong> Subtract the standard deduction (or itemized deductions, if larger) to get taxable income. <strong>4.</strong> Run taxable income through the brackets slice by slice, as this calculator does. <strong>5.</strong> Subtract any tax credits you qualify for — credits reduce tax dollar-for-dollar, unlike deductions. The result is your federal tax before withholding you already paid through your paychecks.</p></article>
+<article class="guide"><h3>Marginal vs Effective Tax Rate</h3><p>Your <strong>marginal rate</strong> is the rate on your last dollar of taxable income — the bracket you land in. Your <strong>effective rate</strong> is your total federal tax divided by your total income, and it is always lower, because most of your income is taxed at the lower bracket rates and the standard deduction is taxed at 0%. Example: a single filer earning $85,000 in 2026 is in the 22% marginal bracket, but pays an effective rate of about 11.6% on gross income. Use the marginal rate to judge a raise or extra freelance income; use the effective rate to judge your overall tax burden.</p></article>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+<h2>Frequently asked questions</h2>
+<details open><summary>What is the standard deduction for 2026?</summary><p>For tax year 2026, the standard deduction is $16,100 for single filers and married filing separately, $32,200 for married filing jointly, and $24,150 for head of household. Filers aged 65+ or blind add $2,050 (single / head of household) or $1,650 per qualifying spouse (joint). Source: IRS Revenue Procedure 2025-32.</p></details>
+<details><summary>What are the 2026 tax brackets?</summary><p>Seven rates apply: 10%, 12%, 22%, 24%, 32%, 35% and 37%. For single filers the bands run to $12,400 (10%), $50,400 (12%), $105,700 (22%), $201,775 (24%), $256,225 (32%) and $640,600 (35%), with 37% above that. Joint filers: $24,800, $100,800, $211,400, $403,550, $512,450 and $768,700, with 37% above.</p></details>
+<details><summary>What tax bracket am I in?</summary><p>Your bracket is determined by your taxable income — gross income minus pre-tax contributions and the standard (or itemized) deduction — and your filing status. Enter your numbers in the calculator above: it shows both your marginal bracket and your (lower) effective rate, plus the tax in each band.</p></details>
+<details><summary>When is the 2026 tax filing deadline?</summary><p>Returns for tax year 2026 are due on <strong>April 15, 2027</strong>. If that date falls on a weekend or federal holiday in a given year, the IRS shifts it to the next business day. You can request an automatic extension to file (not to pay) using Form 4868.</p></details>
+<details><summary>Is this calculator free and private?</summary><p>Yes. It is completely free, needs no account, and every calculation runs in your own browser. Your income figures are never sent to a server — see the Privacy Policy below.</p></details>
+</section>
+
+<div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+<!-- TRUST -->
+<section id="about" class="trust"><h2>About TaxCalc USA</h2><p>TaxCalc USA is a free educational calculator built to make the 2026 US federal tax system easy to understand. We turn the official IRS bracket tables and standard deduction amounts (Revenue Procedure 2025-32) into instant, private estimates you can run as many times as you like — for a new job offer, a raise, freelance income or filing-season planning. The site is supported by advertising so it can stay free for everyone.</p></section>
+
+<section id="privacy" class="trust"><h2>Privacy Policy</h2>
+<p><strong>Last updated: November 11, 2026.</strong></p>
+<p><strong>Your calculator data stays on your device.</strong> All tax and paycheck calculations on this page run entirely in your web browser using JavaScript. The income, deduction and filing-status figures you enter are <strong>never sent to a server</strong>, never stored by us, and disappear when you close the page. We do not ask for names, Social Security numbers, bank details or accounts, and there is no sign-up.</p>
+<h3 style="color:var(--ink)">Advertising and cookies</h3>
+<p>This site is monetized with Google AdSense. Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to this site and/or other sites on the Internet. Google may use the DoubleClick / DART cookie for this purpose.</p>
+<p>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>. You can also opt out of some third-party vendors' use of cookies for personalized advertising at <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">aboutads.info/choices</a>. For more on how Google uses data, see Google's Privacy Policy.</p>
+<h3 style="color:var(--ink)">Analytics &amp; your choices</h3>
+<p>If analytics are enabled in future, they will be aggregate and anonymous (page views, not your calculator inputs). You can block or clear cookies at any time in your browser settings; the calculator will still work fully.</p>
+<p>Questions about privacy: contact us at <a href="mailto:purushotamkumar8757118581@gmail.com">purushotamkumar8757118581@gmail.com</a>.</p></section>
+
+<section id="disclaimer" class="trust"><h2>Disclaimer</h2><div class="note"><strong>Estimates only — not tax advice.</strong> This calculator provides simplified estimates of US federal income tax for tax year 2026 using figures from IRS Revenue Procedure 2025-32. It does not account for state or local taxes, most credits, the Alternative Minimum Tax, capital-gains rates, self-employment tax or individual circumstances. It is not a substitute for advice from a qualified tax professional or the IRS. Always confirm figures on <span>irs.gov</span> before filing.</div></section>
+
+<section id="terms" class="trust"><h2>Terms of Use</h2><p>By using TaxCalc USA you agree to these terms. The site and its calculators are provided free of charge, “as is”, for personal educational use. We work to keep figures accurate and sourced from official IRS publications, but we make no warranty that estimates match any individual's actual tax liability. You are responsible for verifying figures before making financial decisions or filing a return. We may update figures, features or these terms when tax law or IRS guidance changes; continued use means acceptance of the updated terms. Nothing on this site creates a professional, advisory or client relationship.</p></section>
+
+<section id="contact" class="trust"><h2>Contact</h2><p>Found an error in a 2026 figure, have a feature request, or a business enquiry? Email us at <a href="mailto:purushotamkumar8757118581@gmail.com">purushotamkumar8757118581@gmail.com</a> — we read every message and typically reply within a few business days.</p>
+<p style="font-size:13px">Publisher ads file (ads.txt): <code>google.com, pub-4405800574856346, DIRECT, f08c47fec0942fa0</code></p></section>
+</div>
+</main>
+
+<section class="cta"><div class="cta-in"><div><h2>Planning ahead for the 2026 filing season?</h2><p>Run your numbers now — brackets, standard deduction and paycheck withholding in one free, private estimate.</p></div><a class="cta-btn" href="#calculator">Calculate my tax</a></div></section>
+
+<footer><div class="wrap"><div class="foot-grid">
+<div><h3>TaxCalc USA</h3><p>Free 2026 federal income tax calculator, brackets, standard deduction and paycheck estimator. Figures: IRS Rev. Proc. 2025-32. Estimates only — not tax advice.</p></div>
+<div><h3>Quick Links</h3><div class="flinks"><a href="#calculator">Tax Calculator</a><a href="#brackets">2026 Brackets</a><a href="#paycheck">Paycheck Estimator</a><a href="#faq">FAQ</a></div></div>
+<div><h3>Guides</h3><div class="flinks"><a href="#guides">2026 Brackets Explained</a><a href="#guides">Standard Deduction 2026</a><a href="#guides">Calculate Tax in 5 Steps</a><a href="#guides">Marginal vs Effective Rate</a></div></div>
+<div><h3>Contact</h3><div class="flinks"><a href="#about">About</a><a href="#privacy">Privacy Policy</a><a href="#terms">Terms</a><a href="#disclaimer">Disclaimer</a><a href="#contact">Contact</a></div><p style="margin-top:10px"><a href="mailto:purushotamkumar8757118581@gmail.com">purushotamkumar8757118581@gmail.com</a></p></div>
+</div><div class="smallprint"><span>© 2026 TaxCalc USA. Tax year 2026 returns are due April 15, 2027.</span><span>Theme: Start Bootstrap Modern Business (MIT)</span></div></div></footer>
+
+<script>
+var BRACKETS={
+ single:{std:16100,addon:2050,bands:[[12400,.10],[50400,.12],[105700,.22],[201775,.24],[256225,.32],[640600,.35],[Infinity,.37]]},
+ mfj:{std:32200,addon:1650,bands:[[24800,.10],[100800,.12],[211400,.22],[403550,.24],[512450,.32],[768700,.35],[Infinity,.37]]},
+ hoh:{std:24150,addon:2050,bands:[[17700,.10],[67450,.12],[105700,.22],[201775,.24],[256200,.32],[640600,.35],[Infinity,.37]]},
+ mfs:{std:16100,addon:1650,bands:[[12400,.10],[50400,.12],[105700,.22],[201775,.24],[256225,.32],[384350,.35],[Infinity,.37]]}
+};
+function fmt(n){return '$'+Math.round(n).toLocaleString('en-US')}
+function calcTax(taxable,status){
+ var bands=BRACKETS[status].bands,prev=0,tax=0,rows=[],marginal=bands[0][1];
+ for(var i=0;i<bands.length;i++){var cap=bands[i][0],rate=bands[i][1];if(taxable>prev){var inBand=Math.min(taxable,cap)-prev;var t=inBand*rate;tax+=t;marginal=rate;rows.push({rate:rate,from:prev,to:Math.min(taxable,cap),inBand:inBand,tax:t});}prev=cap;if(taxable<=cap)break;}
+ return {tax:tax,rows:rows,marginal:marginal};
+}
+function computeMain(){
+ var income=Math.max(0,+document.getElementById('income').value||0);
+ var status=document.getElementById('status').value;
+ var pretax=Math.max(0,+document.getElementById('pretax').value||0);
+ var other=Math.max(0,+document.getElementById('otherded').value||0);
+ var age=document.getElementById('age65').checked;
+ var cfg=BRACKETS[status];
+ var std=cfg.std+(age?cfg.addon:0);
+ var agi=Math.max(0,income-pretax);
+ var taxable=Math.max(0,agi-std-other);
+ var res=calcTax(taxable,status);
+ document.getElementById('taxOwed').textContent=fmt(res.tax);
+ document.getElementById('takeHomeLine').textContent='Take-home after federal tax: '+fmt(Math.max(0,income-res.tax))+'  ·  Before FICA & state tax';
+ document.getElementById('taxableOut').textContent=fmt(taxable);
+ document.getElementById('stdOut').textContent=fmt(std);
+ document.getElementById('effOut').textContent=(income>0?(res.tax/income*100).toFixed(1):'0.0')+'%';
+ document.getElementById('margOut').textContent=Math.round(res.marginal*100)+'%';
+ var html='';
+ if(res.rows.length===0) html='<tr><td colspan="3" style="color:var(--muted)">No taxable income — $0 federal tax.</td></tr>';
+ res.rows.forEach(function(r){html+='<tr><td><strong>'+Math.round(r.rate*100)+'%</strong> band</td><td class="r">'+fmt(r.inBand)+'</td><td class="r">'+fmt(r.tax)+'</td></tr>';});
+ document.getElementById('breakdown').innerHTML=html;
+ return {income:income,status:status,tax:res.tax};
+}
+function renderBrackets(status){
+ var bands=BRACKETS[status].bands,prev=0,cum=0,html='';
+ bands.forEach(function(b){var cap=b[0],rate=b[1];var range=cap===Infinity?fmt(prev)+' +':fmt(prev+ (prev===0?0:0))+' – '+fmt(cap);if(prev===0)range='$0 – '+fmt(cap);else if(cap!==Infinity)range=fmt(prev+1)+' – '+fmt(cap);
+ var bandTax=cap===Infinity?null:(cap-prev)*rate;if(bandTax!==null)cum+=bandTax;
+ html+='<tr><td><strong>'+Math.round(rate*100)+'%</strong></td><td>'+range+'</td><td class="r">'+(cap===Infinity?'—':fmt(cum))+'</td></tr>';prev=cap;});
+ document.getElementById('bracketBody').innerHTML=html;
+}
+function computePay(){
+ var salary=Math.max(0,+document.getElementById('pSalary').value||0);
+ var freq=+document.getElementById('pFreq').value;
+ var status=document.getElementById('pStatus').value;
+ var wageBase=Math.max(0,+document.getElementById('wageBase').value||184500);
+ var cfg=BRACKETS[status];
+ var taxable=Math.max(0,salary-cfg.std);
+ var fed=calcTax(taxable,status).tax;
+ var ss=Math.min(salary,wageBase)*0.062;
+ var med=salary*0.0145;
+ var grossPP=freq?salary/freq:0;
+ document.getElementById('ppGross').textContent=fmt(grossPP);
+ document.getElementById('ppFed').textContent='−'+fmt(freq?fed/freq:0);
+ document.getElementById('ppSS').textContent='−'+fmt(freq?ss/freq:0);
+ document.getElementById('ppMed').textContent='−'+fmt(freq?med/freq:0);
+ document.getElementById('ppNet').textContent=fmt(freq?(salary-fed-ss-med)/freq:0);
+ document.getElementById('ficaAnnual').textContent=fmt(ss+med);
+ document.getElementById('netAnnual').textContent=fmt(salary-fed-ss-med);
+}
+['income','status','pretax','otherded','age65'].forEach(function(id){document.getElementById(id).addEventListener('input',computeMain);document.getElementById(id).addEventListener('change',computeMain);});
+['pSalary','pFreq','pStatus','wageBase'].forEach(function(id){document.getElementById(id).addEventListener('input',computePay);document.getElementById(id).addEventListener('change',computePay);});
+document.getElementById('calcBtn').addEventListener('click',function(){computeMain();document.getElementById('calculator').scrollIntoView({behavior:'smooth',block:'start'});});
+document.querySelectorAll('.tab').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');renderBrackets(btn.getAttribute('data-tab'));});});
+computeMain();renderBrackets('single');computePay();
+</script>
+</body>
+</html>

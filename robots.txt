@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://youtubedhan11-cpu.github.io/taxcalc-usa/sitemap.xml
